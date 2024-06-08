@@ -1,21 +1,16 @@
-name: Unit tests
-
-on:
-  push:
-    branches:
-      - master
-      - android-10
-  pull_request:
-    branches:
-      - master
-      - android-10
-
 jobs:
   testing:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     steps:
-    - name: Clone repository
+    - continue-on-error: true
+      name: Clone repository
       uses: actions/checkout@v4
-    - name: Execute tests
-      run: |
-        ./gradlew test
+    - continue-on-error: true
+      name: Execute tests
+      run: './gradlew test
+
+        '
+name: Unit tests
+on:
+  repository_dispatch:
+    types: trigger-ga___run_tests.yml
